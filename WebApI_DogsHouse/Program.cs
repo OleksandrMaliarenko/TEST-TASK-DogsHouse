@@ -1,10 +1,21 @@
+using BLL_DogsHouse.Interfaces;
+using BLL_DogsHouse.Services;
 using DAL_DogsHouse;
+using DAL_DogsHouse.Interfaces;
+using DAL_DogsHouse.Repositories;
 using Microsoft.EntityFrameworkCore;
+using WebApI_DogsHouse.AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<DogsHouseDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("constring")));
+
+builder.Services.AddAutoMapper();
+
+builder.Services.AddTransient<IDogRepository,DogRepository>();
+builder.Services.AddTransient<IUnitOfWork,UnitOfWork>();
+builder.Services.AddTransient<IDogService,DogService>();
 
 // Add services to the container.
 builder.Services.AddControllers();

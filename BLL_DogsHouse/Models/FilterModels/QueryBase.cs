@@ -8,8 +8,8 @@ namespace BLL_DogsHouse.Models.FilterModels
 {
     public abstract class QueryBase
     {
-        public int Offset { get; set; }
+        public int pageNumber { get; set; } = 1;
 
-        public int Limit { get; set; }
+        public int pageSize { get; set; } = 10;
     }
 }
