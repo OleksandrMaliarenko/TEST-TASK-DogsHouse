@@ -1,9 +1,11 @@
+using AspNetCoreRateLimit;
 using BLL_DogsHouse.Interfaces;
 using BLL_DogsHouse.Services;
 using DAL_DogsHouse;
 using DAL_DogsHouse.Interfaces;
 using DAL_DogsHouse.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using WebApI_DogsHouse.AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +26,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddMemoryCache();
+builder.Services.Configure<IpRateLimitOptions>(builder.Configuration.GetSection("IpRateLimiting"));
+builder.Services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
+builder.Services.AddSingleton<IRateLimitCounterStore, MemoryCacheRateLimitCounterStore>();
+builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+builder.Services.AddSingleton<IProcessingStrategy, AsyncKeyLockProcessingStrategy>();
+builder.Services.AddInMemoryRateLimiting();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -32,6 +42,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseIpRateLimiting();
 
 app.UseAuthorization();
 
