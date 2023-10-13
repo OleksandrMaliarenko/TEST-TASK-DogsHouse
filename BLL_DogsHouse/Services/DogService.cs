@@ -5,11 +5,6 @@ using BLL_DogsHouse.Models.Requests;
 using BLL_DogsHouse.Models.Views;
 using DAL_DogsHouse.Entities;
 using DAL_DogsHouse.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BLL_DogsHouse.Services
 {
@@ -33,13 +28,13 @@ namespace BLL_DogsHouse.Services
             {
                 throw new ArgumentException("Wrong order");
             }
-            
-            if(dogQuery.attribute != "name" &&  dogQuery.attribute != "color" && dogQuery.attribute != "tail_length" && dogQuery.attribute != "weight")
+
+            if (dogQuery.attribute != "name" && dogQuery.attribute != "color" && dogQuery.attribute != "tail_length" && dogQuery.attribute != "weight")
             {
                 throw new ArgumentException("Wrong attribute");
             }
 
-            if(dogQuery.pageSize<=0 || dogQuery.pageNumber <= 0)
+            if (dogQuery.pageSize <= 0 || dogQuery.pageNumber <= 0)
             {
                 throw new ArgumentException("Wrong pagination");
             }
@@ -51,7 +46,7 @@ namespace BLL_DogsHouse.Services
                 throw new Exception("DataBase is empty");
             }
 
-            if(dogQuery.pageNumber>1 && (dogQuery.pageNumber - 1)*dogQuery.pageSize > dogs.Count()-1)
+            if (dogQuery.pageNumber > 1 && (dogQuery.pageNumber - 1) * dogQuery.pageSize > dogs.Count() - 1)
             {
                 throw new ArgumentException("Wrong pagination");
             }
@@ -68,7 +63,7 @@ namespace BLL_DogsHouse.Services
                 }
             }
             else
-            { 
+            {
                 if (dogQuery.attribute == "color")
                 {
                     if (dogQuery.order == "asc")
@@ -92,7 +87,7 @@ namespace BLL_DogsHouse.Services
                         {
                             dogs = dogs.OrderByDescending(x => x.Tail_Length);
                         }
-                    } 
+                    }
                     else
                     {
                         if (dogQuery.attribute == "weight")
@@ -110,9 +105,9 @@ namespace BLL_DogsHouse.Services
                 }
             }
 
-            if(dogQuery.pageNumber == 1)
+            if (dogQuery.pageNumber == 1)
             {
-                dogs = dogs.Skip(0).Take( dogQuery.pageSize);
+                dogs = dogs.Skip(0).Take(dogQuery.pageSize);
             }
             else
             {

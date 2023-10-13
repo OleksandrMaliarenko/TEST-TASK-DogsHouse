@@ -6,13 +6,7 @@ using BLL_DogsHouse.Models.Views;
 using BLL_DogsHouse.Services;
 using DAL_DogsHouse.Entities;
 using DAL_DogsHouse.Interfaces;
-using Microsoft.Extensions.Logging;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace UnitTests_DogsHouse
@@ -95,7 +89,7 @@ namespace UnitTests_DogsHouse
         public async Task GetDogs_InvalidAttribute_ThrowsAgrumentException()
         {
             //Arrange
-            IEnumerable<Dog> dogs = initialData;     
+            IEnumerable<Dog> dogs = initialData;
             DogQuery dogQuery = new DogQuery() { attribute = "Invalid" };
             var mockUnitOfWork = new Mock<IUnitOfWork>();
             mockUnitOfWork.Setup(m => m.DogRepository.GetAll()).Returns(Task.FromResult(dogs));
@@ -192,7 +186,7 @@ namespace UnitTests_DogsHouse
             //Arrange
             IEnumerable<Dog> dogs = initialData;
             var expectedData = initialData.OrderBy(x => x.Color).Skip(0).Take(2).ToList();
-            DogQuery dogQuery = new DogQuery() { attribute="color", pageNumber = 1, pageSize = 2 };
+            DogQuery dogQuery = new DogQuery() { attribute = "color", pageNumber = 1, pageSize = 2 };
             var mockUnitOfWork = new Mock<IUnitOfWork>();
             mockUnitOfWork.Setup(m => m.DogRepository.GetAll()).Returns(Task.FromResult(dogs));
             var service = new DogService(mockUnitOfWork.Object, _mapper);

@@ -1,10 +1,5 @@
 ﻿using DAL_DogsHouse.Interfaces;
 using DAL_DogsHouse.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL_DogsHouse
 {
@@ -18,7 +13,7 @@ namespace DAL_DogsHouse
             _context = context;
         }
 
-        public IDogRepository DogRepository 
+        public IDogRepository DogRepository
         {
             get
             {

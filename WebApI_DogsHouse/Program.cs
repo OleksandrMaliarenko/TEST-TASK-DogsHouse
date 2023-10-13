@@ -5,7 +5,6 @@ using DAL_DogsHouse;
 using DAL_DogsHouse.Interfaces;
 using DAL_DogsHouse.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using WebApI_DogsHouse.AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,9 +14,9 @@ builder.Services.AddDbContext<DogsHouseDbContext>(options =>
 
 builder.Services.AddAutoMapper();
 
-builder.Services.AddTransient<IDogRepository,DogRepository>();
-builder.Services.AddTransient<IUnitOfWork,UnitOfWork>();
-builder.Services.AddTransient<IDogService,DogService>();
+builder.Services.AddTransient<IDogRepository, DogRepository>();
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+builder.Services.AddTransient<IDogService, DogService>();
 
 // Add services to the container.
 builder.Services.AddControllers();

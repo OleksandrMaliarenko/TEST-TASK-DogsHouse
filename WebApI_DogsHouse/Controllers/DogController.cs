@@ -2,8 +2,6 @@
 using BLL_DogsHouse.Models.Queries;
 using BLL_DogsHouse.Models.Requests;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.Threading.Tasks;
 
 namespace WebApI_DogsHouse.Controllers
 {
